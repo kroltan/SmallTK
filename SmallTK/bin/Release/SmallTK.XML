@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SmallTK</name>
+    </assembly>
+    <members>
+        <member name="T:SmallTK.GameEngine">
+            <summary>
+            Master object, where the main game events are defined
+            </summary>
+        </member>
+        <member name="M:SmallTK.GameEngine.Start(Microsoft.SmallBasic.Library.Primitive)">
+            <summary>
+            Starts the engine, trying to run at the given framerate.
+            </summary>
+            <param name="fps">The target framerate</param>
+        </member>
+        <member name="M:SmallTK.GameEngine.Stop">
+            <summary>
+            Stops the game, and calls OnStop.
+            </summary>
+        </member>
+        <member name="E:SmallTK.GameEngine.OnUpdate">
+            <summary>
+            This is called every frame, and is where most of the game happens.
+            </summary>
+        </member>
+        <member name="E:SmallTK.GameEngine.OnLoad">
+            <summary>
+            This is called when the engine starts and is ready to go.
+            </summary>
+        </member>
+        <member name="E:SmallTK.GameEngine.OnStop">
+            <summary>
+            This is called after the engine has finished closing.
+            </summary>
+        </member>
+        <member name="T:SmallTK.Sprites">
+            <summary>
+            Handles the creation and edition of sprites in the game, including movement, scaling and rotation.
+            </summary>
+        </member>
+        <member name="M:SmallTK.Sprites.Create(Microsoft.SmallBasic.Library.Primitive)">
+            <summary>
+            Adds a new sprite to the game at the center of the screen
+            </summary>
+            <param name="imageLocation">The path to the image to use</param>
+            <returns>The sprite that was just created</returns>
+        </member>
+        <member name="M:SmallTK.Sprites.Remove(Microsoft.SmallBasic.Library.Primitive)">
+            <summary>
+            Removes the given sprite from the game.
+            </summary>
+            <param name="sprite">The sprite to remove</param>
+            <returns>True if the sprite was removed, false otherwise.</returns>
+        </member>
+        <member name="M:SmallTK.Sprites.ChangeImage(Microsoft.SmallBasic.Library.Primitive,Microsoft.SmallBasic.Library.Primitive)">
+            <summary>
+            Changes the image of an existing sprite.
+            </summary>
+            <param name="sprite">The sprite to change</param>
+            <param name="imageLocation">The new image</param>
+            <returns>True if the image was sucessfully changed, False otherwise.</returns>
+        </member>
+        <member name="M:SmallTK.Sprites.Move(Microsoft.SmallBasic.Library.Primitive,Microsoft.SmallBasic.Library.Primitive,Microsoft.SmallBasic.Library.Primitive)">
+            <summary>
+            Changes the position of the sprite.
+            </summary>
+            <param name="sprite">The sprite to move</param>
+            <param name="x">New horizontal coordinate of sprite</param>
+            <param name="y">New vertical coordinate of sprite</param>
+            <returns>True if the sprite could be moved, false otherwise</returns>
+        </member>
+        <member name="M:SmallTK.Sprites.Resize(Microsoft.SmallBasic.Library.Primitive,Microsoft.SmallBasic.Library.Primitive,Microsoft.SmallBasic.Library.Primitive)">
+            <summary>
+            Changes the size of the sprite on each axis.
+            </summary>
+            <param name="sprite">The sprite to resize</param>
+            <param name="x">The horizontal size</param>
+            <param name="y">The vertical size</param>
+            <returns>True if the sprite could be resized, False otherwise</returns>
+        </member>
+        <member name="M:SmallTK.Sprites.Rotate(Microsoft.SmallBasic.Library.Primitive,Microsoft.SmallBasic.Library.Primitive)">
+            <summary>
+            Changes the rotation angle of the sprite to the given value.
+            </summary>
+            <param name="sprite">The sprite to rotate</param>
+            <param name="angle">The new angle</param>
+            <returns>True if the sprite could be rotated, false otherwise</returns>
+        </member>
+    </members>
+</doc>
