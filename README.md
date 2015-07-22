@@ -12,6 +12,7 @@ Uses the awesome [ObjectTK][1] library!
 I intend to polish the current features and add new ones, but always aiming for simplicity of use.
  * Add better input handling (events)
  * Expand sprite API (toggle state without deleting, reading properties, ...)
+   * This includes adding functions to create sprites from basic geometric shapes, like rectangles or circles
  * Allow on-demand graphics mode, for non-realtime games* (e.g. quizzes, puzzle escape)
  * Add non-blocking sound playing, using OpenAL.
 
