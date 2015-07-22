@@ -63,7 +63,6 @@ namespace OpenTKLearn {
             // remember original title
             OriginalTitle = Title;
             // set search path for shader files and extension
-            ProgramFactory.BasePath = "Data/Shaders/";
             ProgramFactory.Extension = "glsl";
         }
 

@@ -1,43 +1,34 @@
-﻿using Microsoft.SmallBasic.Library;
+﻿using System.IO;
+
+using Microsoft.SmallBasic.Library;
+
+using ObjectTK.Shaders;
 
 using OpenTK;
 
+
 namespace SmallTK {
-    /// <summary>
-    /// Master object, where the main game events are defined
-    /// </summary>
-    [SmallBasicType]
     public static class GameEngine {
         internal static SmallTkGame Game;
 
-        /// <summary>
-        /// This is called every frame, and is where most of the game happens.
-        /// </summary>
-        public static event SmallBasicCallback OnUpdate;
+        public static SmallBasicCallback OnUpdate;
+        public static SmallBasicCallback OnLoad;
+        public static SmallBasicCallback OnStop;
 
-        /// <summary>
-        /// This is called when the engine starts and is ready to go.
-        /// </summary>
-        public static event SmallBasicCallback OnLoad;
+        private static string _contentPath;
+        public static string ContentPath {
+            get { return _contentPath; }
+            set {
+                _contentPath = value;
+                ProgramFactory.BasePath = Path.Combine(value, "Shaders");
+            }
+        }
 
-        /// <summary>
-        /// This is called after the engine has finished closing.
-        /// </summary>
-        public static event SmallBasicCallback OnStop;
-
-        /// <summary>
-        /// Starts the engine, trying to run at the given framerate.
-        /// </summary>
-        /// <param name="fps">The target framerate</param>
-        public static void Start(Primitive fps) {
+        public static void Start(int fps) {
             using (Game = new SmallTkGame()) {
                 Game.Run(fps, fps);
             }
         }
-
-        /// <summary>
-        /// Stops the game, and calls OnStop.
-        /// </summary>
         public static void Stop() {
             Game.Close();
             Unload();

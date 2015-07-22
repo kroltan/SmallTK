@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 
-using Microsoft.SmallBasic.Library;
-
 using OpenTK;
 
 using OpenTKLearn;
@@ -11,7 +9,6 @@ namespace SmallTK {
     /// <summary>
     /// Handles the creation and edition of sprites in the game, including movement, scaling and rotation.
     /// </summary>
-    [SmallBasicType]
     public static class Sprites {
         private static readonly Dictionary<string, Bitmap> SpriteCache = new Dictionary<string, Bitmap>();
         /// <summary>
@@ -19,7 +16,7 @@ namespace SmallTK {
         /// </summary>
         /// <param name="imageLocation">The path to the image to use</param>
         /// <returns>The sprite that was just created</returns>
-        public static Primitive Create(Primitive imageLocation) {
+        public static int Create(string imageLocation) {
             var sprite = new Sprite();
             CacheSetSprite(sprite, imageLocation);
             GameEngine.Game.Sprites.Add(sprite);
@@ -31,7 +28,7 @@ namespace SmallTK {
         /// </summary>
         /// <param name="sprite">The sprite to remove</param>
         /// <returns>True if the sprite was removed, false otherwise.</returns>
-        public static Primitive Remove(Primitive sprite) {
+        public static bool Remove(int sprite) {
             if (GameEngine.Game.Sprites.Count <= sprite) {
                 return false;
             }
@@ -45,7 +42,7 @@ namespace SmallTK {
         /// <param name="sprite">The sprite to change</param>
         /// <param name="imageLocation">The new image</param>
         /// <returns>True if the image was sucessfully changed, False otherwise.</returns>
-        public static Primitive ChangeImage(Primitive sprite, Primitive imageLocation) {
+        public static bool ChangeImage(int sprite, string imageLocation) {
             Sprite spr;
             if (!TryGetSprite(sprite, out spr)) {
                 return false;
@@ -61,7 +58,7 @@ namespace SmallTK {
         /// <param name="x">New horizontal coordinate of sprite</param>
         /// <param name="y">New vertical coordinate of sprite</param>
         /// <returns>True if the sprite could be moved, false otherwise</returns>
-        public static Primitive Move(Primitive sprite, Primitive x, Primitive y) {
+        public static bool Move(int sprite, float x, float y) {
             Sprite spr;
             if (!TryGetSprite(sprite, out spr)) {
                 return false;
@@ -77,7 +74,7 @@ namespace SmallTK {
         /// <param name="x">The horizontal size</param>
         /// <param name="y">The vertical size</param>
         /// <returns>True if the sprite could be resized, False otherwise</returns>
-        public static Primitive Resize(Primitive sprite, Primitive x, Primitive y) {
+        public static bool Resize(int sprite, float x, float y) {
             Sprite spr;
             if (!TryGetSprite(sprite, out spr)) {
                 return false;
@@ -92,7 +89,7 @@ namespace SmallTK {
         /// <param name="sprite">The sprite to rotate</param>
         /// <param name="angle">The new angle</param>
         /// <returns>True if the sprite could be rotated, false otherwise</returns>
-        public static Primitive Rotate(Primitive sprite, Primitive angle) {
+        public static bool Rotate(int sprite, float angle) {
             Sprite spr;
             if (!TryGetSprite(sprite, out spr)) {
                 return false;
@@ -112,10 +109,11 @@ namespace SmallTK {
 
         internal static void CacheSetSprite(Sprite sprite, string imageLocation) {
             if (SpriteCache.ContainsKey(imageLocation)) {
-                sprite.SetBitmap(SpriteCache[imageLocation]);
+                var cached = SpriteCache[imageLocation];
+                sprite.SetBitmap(new Bitmap(cached, cached.Width, cached.Height));
             } else {
                 var bitmap = new Bitmap(imageLocation);
-                SpriteCache[imageLocation] = bitmap;
+                SpriteCache[imageLocation] = new Bitmap(bitmap, bitmap.Width, bitmap.Height);
                 sprite.SetBitmap(bitmap);
             }
         }
